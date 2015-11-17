@@ -21,10 +21,17 @@ MainWindow::~MainWindow()
 *
 */
 
+// new
+void MainWindow::on_actionNew_triggered()
+{
+    mFilename = "";
+    ui->textEdit->setPlainText("");
+}
+
 // open
 void MainWindow::on_actionOpen_triggered()
 {
-    QString file = QFileDialog::getOpenFileName(this, "open a file");
+    QString file = QFileDialog::getOpenFileName(this, "Open a file");
 
     if(!file.isEmpty()) {
         QFile sFile(file);
@@ -41,17 +48,12 @@ void MainWindow::on_actionOpen_triggered()
     }
 }
 
-// new
-void MainWindow::on_actionNew_triggered()
-{
-    mFilename = "";
-    ui->textEdit->setPlainText("");
-}
 
 // save
 void MainWindow::on_actionSave_triggered()
 {
     QFile sFile(mFilename);
+
     if(sFile.open(QFile::WriteOnly | QFile::Text)) {
         QTextStream out(&sFile);
 
@@ -60,14 +62,25 @@ void MainWindow::on_actionSave_triggered()
         sFile.flush();
         sFile.close();
     }
+
 }
 
 // save as
 void MainWindow::on_actionSave_As_triggered()
 {
+    QString file = QFileDialog::getSaveFileName(this, "Save file as:");
 
+    if(!file.isEmpty()) {
+
+        mFilename = file;
+        on_actionSave_triggered();
+
+    } else {
+
+    }
 }
 
+// exit program
 void MainWindow::on_actionExit_triggered()
 {
 
