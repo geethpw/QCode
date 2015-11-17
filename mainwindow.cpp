@@ -52,16 +52,27 @@ void MainWindow::on_actionOpen_triggered()
 // save
 void MainWindow::on_actionSave_triggered()
 {
+
+    // test for file name
     QFile sFile(mFilename);
 
-    if(sFile.open(QFile::WriteOnly | QFile::Text)) {
-        QTextStream out(&sFile);
+    if(mFilename.isEmpty()){
 
-        out << ui->textEdit->toPlainText();
+        on_actionSave_As_triggered();
 
-        sFile.flush();
-        sFile.close();
+    } else {
+
+        if(sFile.open(QFile::WriteOnly | QFile::Text)) {
+            QTextStream out(&sFile);
+
+            out << ui->textEdit->toPlainText();
+
+            sFile.flush();
+            sFile.close();
+        }
+
     }
+
 
 }
 
@@ -74,8 +85,6 @@ void MainWindow::on_actionSave_As_triggered()
 
         mFilename = file;
         on_actionSave_triggered();
-
-    } else {
 
     }
 }
