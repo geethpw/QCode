@@ -14,7 +14,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 /*
 *
 * File menu items
@@ -92,7 +91,7 @@ void MainWindow::on_actionSave_As_triggered()
 // exit program
 void MainWindow::on_actionExit_triggered()
 {
-
+    QApplication::quit();
 }
 
  /*

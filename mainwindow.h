@@ -40,6 +40,7 @@ private slots:
 
     void on_actionAbout_QCode_triggered();
 
+
 private:
     Ui::MainWindow *ui;
     QString mFilename;
